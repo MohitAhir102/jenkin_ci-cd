@@ -17,9 +17,14 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                sh '. .venv/bin/activate && pytest tests/'
-            }
+                sh '''
+                . .venv/bin/activate
+                export PYTHONPATH=.
+                python -m pytest tests/
+    '''
+           }
         }
+
 
         stage('Deploy') {
             steps {
